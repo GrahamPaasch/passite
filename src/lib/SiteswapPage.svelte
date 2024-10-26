@@ -224,22 +224,25 @@
 			{#if nJugglers > 1}
 				<div class=localThrows>
 					<table>
-						<tr>
-							<td>Local&nbsp;</td>
-							<td class=space />
-							<td colspan={localPeriod + 1}>Siteswap</td>
-							<td colspan={localPeriod + 1}>
-								{#if prechacthisUrl}
-									<a href={prechacthisUrl}>Prechac</a>
-								{:else}
-									Local
-								{/if}
-							</td>
+						<thead>
+							<tr>
+								<td>Local&nbsp;</td>
+								<td class=space />
+								<td colspan={localPeriod + 1}>Siteswap</td>
+								<td colspan={localPeriod + 1}>
+									{#if prechacthisUrl}
+										<a href={prechacthisUrl}>Prechac</a>
+									{:else}
+										Local
+									{/if}
+								</td>
 
-							{#if nJugglers == 2 && !unusualThrows}
-								<td colspan={localPeriod}>Words</td>
-							{/if}
-						</tr>
+								{#if nJugglers == 2 && !unusualThrows}
+									<td colspan={localPeriod}>Words</td>
+								{/if}
+							</tr>
+						</thead>
+						<tbody>
 						{#each startConfigurations as j}
 							<tr>
 								<th>{j.name} <sub>{j.startProps['left hand'] || 0}|{j.startProps['right hand'] || 0}</sub></th>
@@ -262,6 +265,7 @@
 							</tr>
 
 						{/each}
+						</tbody>
 					</table>
 
 				</div>

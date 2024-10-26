@@ -101,7 +101,7 @@ function deleteKey(type, key) {
 		bind:value={content}
 	/>
 {:else if children}
-	<table><tr><td>
+	<table><tbody><tr><td>
 				<!--
 		<button
 			class="pure-button"
@@ -112,61 +112,63 @@ function deleteKey(type, key) {
 		-->
 	</td><td>
 		<table>
-			{#each children as { key, subschema, foldable } }
-			<tr class:clickable={foldable} on:click={(e) => { if (foldable) { open[key] ^= 1; } }}>
-				<td>
-					{#if foldable}
-						<Icon type={open[key] ? "caret-bottom" : "caret-right"} fill={true}/>
-					{/if}
-				</td>
-				<td>
-					{key}
-				</td>
-				<td>
-					{#if !foldable}
+			<tbody>
+				{#each children as { key, subschema, foldable } }
+				<tr class:clickable={foldable} on:click={(e) => { if (foldable) { open[key] ^= 1; } }}>
+					<td>
+						{#if foldable}
+							<Icon type={open[key] ? "caret-bottom" : "caret-right"} fill={true}/>
+						{/if}
+					</td>
+					<td>
+						{key}
+					</td>
+					<td>
+						{#if !foldable}
+							<svelte:self bind:content={content[key]} schema={subschema} path={path + '.' + key} />
+						{:else if !open[key]}
+							{preview(content[key])}
+						{/if}
+					</td>
+				</tr>
+
+				{#if foldable && open[key]}
+				<tr>
+					<td></td>
+					<td colspan=2>
 						<svelte:self bind:content={content[key]} schema={subschema} path={path + '.' + key} />
-					{:else if !open[key]}
-						{preview(content[key])}
-					{/if}
-				</td>
-			</tr>
+					</td>
+				</tr>
+				{/if}
 
-			{#if foldable && open[key]}
-			<tr>
-				<td></td>
-				<td colspan=2>
-					<svelte:self bind:content={content[key]} schema={subschema} path={path + '.' + key} />
-				</td>
-			</tr>
-			{/if}
-
-			{/each}
-			<tr>
-				<td>
-				</td>
-				<td>
-					{#if edit && type == 'object'}
-					<input
-						class=key
-						type=text
-						size=5
-						placeholder=key
-						bind:value={newKey}
-					/>
-					{/if}
-				</td>
-				<td>
-					{#if edit}
-					<button
-						class="pure-button"
-						class:pure-button-disabled={!newKey || content[newKey]}
-						on:click={(e) => addKey(type)}
-					>
-						<Icon type=plus />
-					</button>
-					{/if}
-				</td>
-			</tr>
+				{/each}
+				<tr>
+					<td>
+					</td>
+					<td>
+						{#if edit && type == 'object'}
+						<input
+							class=key
+							type=text
+							size=5
+							placeholder=key
+							bind:value={newKey}
+						/>
+						{/if}
+					</td>
+					<td>
+						{#if edit}
+						<button
+							class="pure-button"
+							class:pure-button-disabled={!newKey || content[newKey]}
+							on:click={(e) => addKey(type)}
+						>
+							<Icon type=plus />
+						</button>
+						{/if}
+					</td>
+				</tr>
+			</tbody>
 		</table>
-	</td></tr></table>
+	</td></tr></tbody></table>
 {/if}
