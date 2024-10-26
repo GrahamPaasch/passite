@@ -72,8 +72,8 @@
 		if (fullscreen)
 			params.fullscreen = 1;
 		fullUrl = U(url, params);
-		if (browser === true && window && ('history' in window))
-			history.replaceState({}, '', fullUrl);
+		if (browser === true)
+			goto(fullUrl, { replaceState: true, keepFocus: true });
 	}
 
 	function share() {

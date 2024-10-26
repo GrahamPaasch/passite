@@ -3,7 +3,7 @@ import { appName, useLocalStorage } from '$lib/passist.mjs';
 import { goto } from '$app/navigation';
 
 if (useLocalStorage)
-	goto(localStorage.getItem('last-pattern-page') ?? '/siteswap');
+	goto(localStorage.getItem('last-pattern-page') ?? '/siteswap', { replaceState:true });
 
 </script>
 
