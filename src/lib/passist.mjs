@@ -30,7 +30,7 @@ function siteswapUrl(p)
 		query.fullscreen = 1;
 	if (p.handsInput)
 		query.hands = p.handsInput.replace(/[^a-z]+/gi, '-');
-	return U('/siteswap/' + ((typeof p.siteswapInput === 'string') ? encodeUrlPathPart(p.siteswapInput) : ''), query);
+	return U('/siteswap/' + ((typeof p.siteswapInput === 'string') ? encodeUrlPathPart(p.siteswapInput || '-') : ''), query);
 }
 
 function symmetricSiteswapUrl(p)
@@ -40,7 +40,7 @@ function symmetricSiteswapUrl(p)
 		query.jugglers = p.nJugglers;
 	if (p.fullscreen)
 		query.fullscreen = 1;
-	return U('/symmetric-siteswap/' + encodeUrlPathPart(p.siteswapInput), query);
+	return U('/symmetric-siteswap/' + encodeUrlPathPart(p.siteswapInput || '-'), query);
 }
 
 function extendedSiteswapUrl(p)

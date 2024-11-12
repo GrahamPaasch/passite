@@ -22,6 +22,8 @@
 
 	if (init) {
 		input = init.params.input;
+		if (input == '-')
+			input = '';
 
 		const nJugglersUrl = parseInt(init.url.searchParams.get('jugglers'));
 		if (nJugglersUrl && nJugglersUrl >= 1)
