@@ -34,7 +34,7 @@
 	}
 
 	if (inputStr) {
-		input = inputStr.split('/');
+		input = inputStr.split('/').map(i => i == '-' ? '' : i);
 		nJugglers = input.length;
 	}
 	$: useLocalStorage && input.every(x => x) && localStorage.setItem("extended-siteswap/urlSuffix", urlSuffix);

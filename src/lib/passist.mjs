@@ -50,7 +50,7 @@ function extendedSiteswapUrl(p)
 		query.jugglers = p.nJugglers;
 	if (p.fullscreen)
 		query.fullscreen = 1;
-	return U('/extended-siteswap/' + encodeUrlPathPart(p.siteswapInputs.join('/')), query);
+	return U('/extended-siteswap/' + encodeUrlPathPart(p.siteswapInputs.map(i => i || '-').join('/')), query);
 }
 
 function siteswapAlternativesUrl(p)

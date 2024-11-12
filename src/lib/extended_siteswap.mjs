@@ -230,7 +230,7 @@ constructor(input, options = {})
 		}
 	} else if (Array.isArray(input)) {
 		const errors = [];
-		let passing = input;;
+		let passing = input.map(i => i || '-');
 
 		this.notation = passing.length == 1 ? passing[0] : '<' + passing.join('|') + '>'; // in case we can't parse it
 
