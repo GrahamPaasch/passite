@@ -112,7 +112,7 @@ function blurTargetOnEnter(e) {
 	.range-value { display:inline-block; min-width:2.5em; text-align:right; padding-left:1em }
 	label {
 		padding: 0.4em 0.75em;
-		margin: 0;
+		margin: 0 !important;
 		font-weight: 400;
 		line-height: 1.5;
 		text-align: center;
