@@ -8,12 +8,12 @@ const dev = mode === 'development';
 
 const config = {
 	causal_diagram_widget: {
-		entry: './src/lib/CausalDiagramWidget.svelte',
+		entry: './src/api/causal_diagram_widget.mjs',
 		name: 'CausalDiagramWidget',
 		fileName: 'causal-diagram-widget-standalone.mjs',
 	},
 	animation_widget: {
-		entry: './src/lib/AnimationWidget.svelte',
+		entry: './src/api/animation_widget.mjs',
 		name: 'AnimationWidget',
 		fileName: 'animation-widget-standalone.mjs',
 	},
