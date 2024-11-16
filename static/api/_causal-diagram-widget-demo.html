@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Animation widget demo</title>
+	<title>Causal Diagram widget demo</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
 		body, html { height:100%; overflow:hidden }
@@ -34,11 +34,10 @@ fetch('https://passist.org/api/examples/holy_grail.jif')
 fetch('https://passist.org/api/examples/531.jif')
 	.then(response => response.json())
 	.then(jif => {
-		const cdw = new CausalDiagramWidget({
+		new CausalDiagramWidget({
 			target: document.getElementById("bottom"),
 			props: { jif }
 		});
-		// setTimeout(() => { cdw.jugglingSpeed = 4 }, 2000);
 	})
 
 </script>
