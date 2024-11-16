@@ -1,6 +1,16 @@
 <svelte:options namespace=svg />
 
 <script>
+	// function from svelte/src/utils.js, not sure if we can import this somehow..
+	function calculate_hash(str) {
+		str = str.replace(/\r/g, '');
+		let hash = 5381;
+		let i = str.length;
+
+		while (i--) hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
+		return (hash >>> 0).toString(36);
+	}
+
 	export let jif;
 	export let startConfigurations;
 	export let isLadderDiagram = false;
@@ -19,6 +29,7 @@
 	let width, height;
 	let period = 1;
 	let nodes = {};
+	let hash = 'hash';
 
 	const arrowLength = 20;
 
@@ -189,6 +200,7 @@ $: {
 			}
 		}
 		nodes = nodes; // update svelte state
+		hash = calculate_hash(JSON.stringify(nodes));
 	}
 </script>
 
@@ -281,7 +293,7 @@ $: {
 	{/each}
 
 	<g clip-path="url(#arrow_clip)">
-		<g id=arrows>
+		<g id="arrows-{hash}">
 		{#each nodes as n}
 			<!-- TODO allow more than one arrow per node -->
 			{#if n.arrow}
@@ -298,7 +310,7 @@ $: {
 
 		<!-- should be enough even for siteswap z -->
 		{#each Array(10) as _, index (index)}
-			<use xlink:href="#arrows" transform="translate({-period * dx * index + 1}, 0)" />
+			<use xlink:href="#arrows-{hash}" transform="translate({-period * dx * index + 1}, 0)" />
 		{/each}
 	</g>
 
