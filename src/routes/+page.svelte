@@ -7,7 +7,7 @@
 <style>
 	h2 { font-size:1.25rem}
 	.page  { text-align:center }
-	.title { display:inline-block; text-align:left }
+	.description { display:inline-block; max-width:30em; text-align:justify; margin:0 1em }
 	.meeseeks img { height:8rem; }
 	.cube img     { width:10rem; }
 	.cube  { margin-bottom:2em }
@@ -20,12 +20,15 @@
 </svelte:head>
 
 <div class=page>
+	<h1>{appName}</h1>
 	<p class=meeseeks>
 		<img src="/images/mr_meeseeks_proud2.png" alt="mr meeseeks" />
 	</p>
-	<div class=title>
-		<h1>{appName}</h1>
-		<h2>{appShortDescription}</h2>
+	<div class=description>
+		This is the <b>passing siteswap assistant</b> helping you to find, start and animate passing patterns.
+		It's currently based around siteswaps. Hopefully it will support a much wider pattern variety one day.
+		Solo siteswaps are supported as well by changing the number of jugglers to one.
+		Have fun!
 	</div>
 	<p class=cube>
 		<img src="/images/cube.svg" alt="logo" />
