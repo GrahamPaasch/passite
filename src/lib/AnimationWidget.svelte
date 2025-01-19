@@ -215,11 +215,12 @@
 />
 
 <div bind:this={container} class=container class:isFullscreen class:isMaximized bind:clientWidth={width} bind:clientHeight={height} >
-	<div class=background />
+	<div class=background></div>
 	<canvas
 		bind:this={canvas}
 		class:dragging={dragStart}
-	/>
+	>
+	</canvas>
 	<div class="controls position-top position-right">
 		{#if isFull}
 		<Icon type=fullscreen_exit on:click={e => {showSettings = false; exitFullscreen()}}/>
