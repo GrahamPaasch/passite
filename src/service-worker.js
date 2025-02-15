@@ -55,6 +55,10 @@ self.addEventListener('fetch', (event) => {
 	if (!url.protocol.startsWith('http'))
 		return;
 
+	// ignore dev server requests (kept from old service-worker, not sure if still needed though)
+	if (url.hostname === self.location.hostname && url.port !== self.location.port)
+		return;
+
 	async function respond() {
 		const cache = await caches.open(CACHE);
 
@@ -66,6 +70,9 @@ self.addEventListener('fetch', (event) => {
 				return response;
 			}
 		}
+
+		if (event.request.cache === 'only-if-cached')
+			return;
 
 		// for everything else, try the network first, but
 		// fall back to the cache if we're offline
