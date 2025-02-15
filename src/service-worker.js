@@ -4,10 +4,12 @@ import { build, files, version } from '$service-worker';
 // Create a unique cache name for this deployment
 const CACHE = `cache-${version}`;
 
-const ASSETS = [
+
+const ALL_ASSETS = [
 	...build, // the app itself
 	...files  // everything in `static`
 ];
+const ASSETS = ALL_ASSETS.filter((file) => !file.match(/\/api/));
 
 self.addEventListener('install', (event) => {
 	// Create a new cache and add all files to it
