@@ -32,10 +32,20 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
 	// ignore POST requests etc
-	if (event.request.method !== 'GET') return;
+	if (event.request.method !== 'GET')
+		return;
+
+	// ignore range requests
+	if (event.request.headers.has('range'))
+		return;
+
+	const url = new URL(event.request.url);
+
+	// don't try to handle e.g. data: URIs
+	if (!url.protocol.startsWith('http'))
+		return;
 
 	async function respond() {
-		const url = new URL(event.request.url);
 		const cache = await caches.open(CACHE);
 
 		// `build`/`files` can always be served from the cache
