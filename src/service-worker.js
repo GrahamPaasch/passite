@@ -12,6 +12,14 @@ const ALL_ASSETS = [
 const ASSETS = ALL_ASSETS.filter((file) => !file.match(/\/api/));
 
 self.addEventListener('install', (event) => {
+	// TODO: test what happens if we have some changes in global2.css
+
+	// directly kick out the old service-worker
+	// this has the consequence that for a given page, both the old and the new service-worker might have served requests
+	// see https://web.dev/articles/service-worker-lifecycle#skip_the_waiting_phase
+	// I think this should be save for our use case
+	self.skipWaiting();
+
 	// Create a new cache and add all files to it
 	async function addFilesToCache() {
 		const cache = await caches.open(CACHE);
