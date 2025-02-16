@@ -1,6 +1,16 @@
 <script>
 	import { jifdev, appName } from '$lib/passist.mjs';
 	import { page } from '$app/stores';
+	import { dev } from '$app/environment';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		// don't user service-worker when in develpment to avoid error in firefox
+		// see https://svelte.dev/docs/kit/service-workers#During-development
+		if (!dev) {
+			navigator.serviceWorker.register('/service-worker.js');
+		}
+	});
 
 	let segment = '';
 	$: {
