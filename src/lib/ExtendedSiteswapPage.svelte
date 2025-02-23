@@ -3,7 +3,7 @@
 	import ExtendedSiteswapInput from '$lib/ExtendedSiteswapInput.svelte';
 	import InfoBox from '$lib/InfoBox.svelte';
 	import PatternResult from '$lib/PatternResult.svelte';
-	import { defaults, useLocalStorage, siteswapUrl, siteswapAlternativesUrl, jugglerName, defaultLimbs, limbs2hands, hands2limbs} from '$lib/passist.mjs';
+	import { defaults, useLocalStorage, jugglersInCircle } from '$lib/passist.mjs';
 	import { siteswapNames} from '$lib/patterns.mjs';
 
 	export let init = undefined;
@@ -47,7 +47,7 @@
 		/* 		name: siteswapName ? siteswapName + " (" + extendedSiteswap.toString() + ")" : undefined, */
 		/* 		flipTwos: true, // TODO: implement this */
 
-		extendedSiteswap = new ExtendedSiteswap(input, {nJugglers});
+		extendedSiteswap = new ExtendedSiteswap(input, {nJugglers, jugglers:jugglersInCircle(nJugglers)});
 		url = extendedSiteswap.toUrl();
 		urlSuffix = extendedSiteswap.toUrlSuffix();
 		extendedSiteswapString = extendedSiteswap.toString();
@@ -92,12 +92,12 @@
 				<InfoBox type=error>
 					<h5>Invalid Extended Siteswap</h5>
 					{#if extendedSiteswap && extendedSiteswap.error}
-						<p>
 						{extendedSiteswap.error}
 						{#if extendedSiteswap.error.snippet}
 								<pre>{extendedSiteswap.error.snippet}</pre>
+						{:else}
+								<pre>{extendedSiteswap.error}</pre>
 						{/if}
-						</p>
 					{/if}
 				 <img src=/images/mr_meeseeks_shocked_small.png alt="mr meeseeks is shocked to see an invalid siteswap" >
 				</InfoBox>
