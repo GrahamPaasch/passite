@@ -181,7 +181,7 @@ function _completeRepetition({ jif, warnings })
 
 }
 
-function _completeThrowDetails({ jif, warnings })
+function _completeThrowDetails({ jif, warnings, options })
 {
 	const nLimbs = jif.limbs.length;
 
@@ -193,7 +193,7 @@ function _completeThrowDetails({ jif, warnings })
 		&& typeof t.from     == 'number'
 		&& typeof t.to       == 'number'
 		&& t.time     >= 0
-		&& t.duration > 0
+		&& (t.duration > 0 || (options.keepZeroThrows && t.duration == 0))
 		&& t.from  >= 0
 		&& t.to    >= 0
 		&& t.from  < nLimbs
@@ -463,6 +463,7 @@ export default class Jif
 			propType: 'club',
 			expand: false,
 			props: true,
+			keepZeroThrows: false,
 		}, options);
 
 		const warnings = [];
@@ -485,7 +486,7 @@ export default class Jif
 		_completeLimbDetails({    jif, warnings, nJugglers });
 		_completeJugglerDetails({ jif, warnings, nJugglers });
 		_completeRepetition({     jif, warnings });
-		_completeThrowDetails({   jif, warnings });
+		_completeThrowDetails({   jif, warnings, options });
 
 		if ((options.expand || options.props) && jif.repetition) {
 			if (jif.repetition.limbPermutation) {

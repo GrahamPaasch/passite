@@ -16,7 +16,6 @@
 	export let isLadderDiagram = false;
 	import Jif from '$lib/jif.mjs';
 
-	let jugglers = {};
 	const xoff = 80;
 	const yoff = 70;
 	const dy = 100;
@@ -89,7 +88,7 @@
 	}
 
 $: {
-		_jif = Jif.complete(jif, { expand:true, props:false } ).jif;
+		_jif = Jif.complete(jif, { expand:true, props:false, keepZeroThrows: true } ).jif;
 		const throws = _jif.throws;
 
 		period = _jif.repetition.period;
