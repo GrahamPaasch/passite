@@ -20,8 +20,8 @@ const grammar = `
   Pattern
     = _ beats:Solo+       _ star:Star? _ { return { type:"solo",    star, beats    }; }
     / _ passings:Passing+ _ star:Star? _ &{ return !options.soloOnly } {
-		if (!passings.every(x => x.length == passings[0].length))
-			throw new Error("not all passings have the same number of jugglers");
+        if (!passings.every(x => x.length == passings[0].length))
+          throw new Error("not all passings have the same number of jugglers");
         return { type:"passing", star,
                  beats: zip(passings).map(arrays => [].concat(...arrays)) };
         }
