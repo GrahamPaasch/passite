@@ -88,7 +88,7 @@
 	}
 
 $: {
-		_jif = Jif.complete(jif, { expand:true, props:false, keepZeroThrows: true } ).jif;
+		_jif = Jif.complete(jif, { expand:true, props:false, keepZeroThrows: !isLadderDiagram } ).jif;
 		const throws = _jif.throws;
 
 		period = _jif.repetition.period;
